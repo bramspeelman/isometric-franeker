@@ -1225,7 +1225,7 @@ Werk stap voor stap, controleer de licenties van de data die je gebruikt, en vra
     truck: { half: 7.6, sort: true, boxes: [[-7.4, 7.4, 1.2, 0.45, 1.05, 'dark'], [-7.4, 5.0, 1.25, 1.05, 3.9, 'load'], [5.3, 7.6, 1.22, 0.55, 3.15, 'cab']] },
     bike: { half: 0.9, bike: true, boxes: [[-0.85, 0.85, 0.05, 0.3, 0.75, 'dark'], [-0.32, 0.14, 0.2, 0.8, 1.42, 'body'], [-0.12, 0.08, 0.1, 1.42, 1.66, 'load']] },
   };
-  const CAR = 0, BIKE = 1, WALK = 2, KAATS = 4, ABSEIL = 5, WEIGHT = ['w', 'wb', 'ww'], DENSITY = ['d', 'db', 'dw'], SIDE = [null, 'bo', 'wo'];
+  const CAR = 0, BIKE = 1, WALK = 2, KAATS = 4, ABSEIL = 5, OMA = 6, WEIGHT = ['w', 'wb', 'ww'], DENSITY = ['d', 'db', 'dw'], SIDE = [null, 'bo', 'wo'];
   let lanes = [], movers = [], layer = null, off = null;
   const outs = new Map(), entries = { car: {}, bike: [], walk: [] };
   let exits = new Set();
@@ -1515,6 +1515,7 @@ Werk stap voor stap, controleer de licenties van de data die je gebruikt, en vra
     if (m.mode === WALK) return drawWalker(ctx, m, x, z, dx, dz);
     if (m.mode === KAATS) return drawKaatsers(ctx, m);
     if (m.mode === ABSEIL) return drawAbseiler(ctx, m);
+    if (m.mode === OMA) return drawOma(ctx, m);
     const V = VEHICLES[m.type];
     drawBoxes(ctx, x, z, dx, dz, V.boxes, (role) => (role === 'dark' ? DARK : role === 'load' ? m.load : m.paint), { sort: V.sort, outline: !V.bike });
   }
@@ -1652,6 +1653,27 @@ Werk stap voor stap, controleer de licenties van de data die je gebruikt, en vra
     ]);
   }
 
+  // The old grandma of Don Pedro (Sint Martiniplantsoen 12), on a chair in front of the door facing the street, nodding a
+  // little now and then. Facade point and street direction from 3D BAG and OpenStreetMap.
+  let oma = null;
+  function makeOma() {
+    const c = rdToLocal(165588.8, 577798.2);
+    return { mode: OMA, alpha: 1, x: c.x, z: c.z, dx: -0.418, dz: 0.909 };
+  }
+  function drawOma(ctx, o) {
+    const nod = Math.max(0, Math.sin(clock * 0.35)) ** 8 * 0.05;
+    const WOOD = [110, 72, 44], SKIRT = [52, 56, 82], CARDIGAN = [150, 60, 70], SKIN = [232, 196, 168], GREY = [214, 214, 210];
+    drawBoxes(ctx, o.x, o.z, o.dx, o.dz, [
+      [-0.3, -0.22, 0.24, 0, 1.05, WOOD],
+      [-0.25, 0.25, 0.24, 0.42, 0.5, WOOD],
+      [0.22, 0.34, 0.17, 0, 0.47, SKIRT],
+      [-0.15, 0.34, 0.18, 0.5, 0.63, SKIRT],
+      [-0.2, 0.06, 0.2, 0.63, 1.12, CARDIGAN],
+      [-0.16, 0.01, 0.1, 1.12 - nod, 1.33 - nod, SKIN],
+      [-0.2, -0.04, 0.11, 1.27 - nod, 1.4 - nod, GREY],
+    ], () => WOOD, { sort: true });
+  }
+
   // A bird: two wings that beat, with its shadow far off on the ground.
   function drawBird(ctx, f, b, inView) {
     const nx = -f.dz, nz = f.dx;
@@ -1702,6 +1724,14 @@ Werk stap voor stap, controleer de licenties van de data die je gebruikt, en vra
     // The kaatsers stand on the grass: drawn under the buildings and trees layer, so whatever stands in front hides them.
     kaatsers ||= makeKaatsers();
     if (k >= 0.35 && inView(kaatsers.x, kaatsers.z, 0)) (objectsLayer ? behind : front).push([depthOf(kaatsers.x, kaatsers.z), kaatsers, kaatsers.x, kaatsers.z, 0, 0]);
+    // Don Pedro's grandma sits on the pavement against her facade. When that facade faces the camera she is drawn over
+    // the buildings layer (the facade right behind her would otherwise cover her); turned the other way, the building
+    // stands in front of her and the buildings layer hides her.
+    oma ||= makeOma();
+    if (k >= 0.35 && inView(oma.x, oma.z, 0)) {
+      const facing = oma.dz * VIEW.c - oma.dx * VIEW.s > 0;
+      (facing || !objectsLayer ? front : behind).push([depthOf(oma.x, oma.z), oma, oma.x, oma.z, 0, 0]);
+    }
     // The abseiler hangs on the side of the tower that faces the camera: drawn over the buildings layer.
     abseiler ||= makeAbseiler();
     if (k >= 0.35 && inView(abseiler.x, abseiler.z, 15)) {
