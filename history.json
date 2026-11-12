@@ -1,0 +1,100 @@
+{
+ "stops": [
+  {
+   "n": 1,
+   "year": "1498",
+   "title": "Het Martenahuis",
+   "text": "De familie Martena laat aan de Voorstraat een stins bouwen, een versterkt stenen huis. Het is een van de oudste gebouwen van de stad en nu Museum Martena.",
+   "x": 165361,
+   "y": 577761,
+   "h": 0,
+   "zoom": 1.2,
+   "source": {
+    "label": "Rijksmonumentenregister",
+    "url": "https://monumentenregister.cultureelerfgoed.nl/"
+   },
+   "more": null,
+   "photos": []
+  },
+  {
+   "n": 2,
+   "year": "1585",
+   "title": "De universiteit",
+   "text": "De Staten van Friesland stichten in Franeker een universiteit, de tweede van de Noordelijke Nederlanden na Leiden. Ze bestaat tot 1811, als Napoleon haar opheft. Museum Martena vertelt haar geschiedenis.",
+   "x": 165361,
+   "y": 577761,
+   "h": 0,
+   "zoom": 1.2,
+   "source": {
+    "label": "Wikipedia: Franeker",
+    "url": "https://nl.wikipedia.org/wiki/Franeker"
+   },
+   "more": null,
+   "photos": []
+  },
+  {
+   "n": 3,
+   "year": "1634",
+   "title": "Het Korendragershuisje",
+   "text": "Het gilde van de korendragers krijgt een eigen huisje bij de haven. Zij droegen het graan van de schepen naar de pakhuizen.",
+   "x": 165619,
+   "y": 577865,
+   "h": 0,
+   "zoom": 1.2,
+   "source": {
+    "label": "Rijksmonumentenregister",
+    "url": "https://monumentenregister.cultureelerfgoed.nl/"
+   },
+   "more": null,
+   "photos": []
+  },
+  {
+   "n": 4,
+   "year": "1774",
+   "title": "Eise Eisinga",
+   "text": "Wolkammer Eise Eisinga begint aan een bewegend model van het zonnestelsel in het plafond van zijn woonkamer; in 1781 is het klaar. Het is het oudste nog werkende planetarium ter wereld en sinds 2023 werelderfgoed.",
+   "x": 165462,
+   "y": 577879,
+   "h": 6,
+   "zoom": 1.2,
+   "source": {
+    "label": "Wikipedia: Franeker",
+    "url": "https://nl.wikipedia.org/wiki/Franeker"
+   },
+   "more": null,
+   "photos": []
+  },
+  {
+   "n": 5,
+   "year": "1591",
+   "title": "Het stadhuis",
+   "text": "Franeker bouwt een nieuw stadhuis in renaissancestijl, met twee trapgevels en een achtkantige toren.",
+   "x": 165440,
+   "y": 577837,
+   "h": 10,
+   "zoom": 1.2,
+   "source": {
+    "label": "Rijksmonumentenregister",
+    "url": "https://monumentenregister.cultureelerfgoed.nl/"
+   },
+   "more": null,
+   "photos": []
+  },
+  {
+   "n": 6,
+   "year": "1853",
+   "title": "De eerste PC",
+   "text": "Op het Sjûkelân wordt voor het eerst de PC gekaatst. Het toernooi wordt sindsdien elk jaar in augustus gespeeld.",
+   "x": 165086,
+   "y": 577788,
+   "h": 0,
+   "zoom": 1.2,
+   "source": {
+    "label": "Wikipedia: Franeker",
+    "url": "https://nl.wikipedia.org/wiki/Franeker"
+   },
+   "more": null,
+   "photos": []
+  }
+ ]
+}
