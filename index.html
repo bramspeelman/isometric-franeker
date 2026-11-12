@@ -1225,7 +1225,7 @@ Werk stap voor stap, controleer de licenties van de data die je gebruikt, en vra
     truck: { half: 7.6, sort: true, boxes: [[-7.4, 7.4, 1.2, 0.45, 1.05, 'dark'], [-7.4, 5.0, 1.25, 1.05, 3.9, 'load'], [5.3, 7.6, 1.22, 0.55, 3.15, 'cab']] },
     bike: { half: 0.9, bike: true, boxes: [[-0.85, 0.85, 0.05, 0.3, 0.75, 'dark'], [-0.32, 0.14, 0.2, 0.8, 1.42, 'body'], [-0.12, 0.08, 0.1, 1.42, 1.66, 'load']] },
   };
-  const CAR = 0, BIKE = 1, WALK = 2, KAATS = 4, WEIGHT = ['w', 'wb', 'ww'], DENSITY = ['d', 'db', 'dw'], SIDE = [null, 'bo', 'wo'];
+  const CAR = 0, BIKE = 1, WALK = 2, KAATS = 4, ABSEIL = 5, WEIGHT = ['w', 'wb', 'ww'], DENSITY = ['d', 'db', 'dw'], SIDE = [null, 'bo', 'wo'];
   let lanes = [], movers = [], layer = null, off = null;
   const outs = new Map(), entries = { car: {}, bike: [], walk: [] };
   let exits = new Set();
@@ -1514,6 +1514,7 @@ Werk stap voor stap, controleer de licenties van de data die je gebruikt, en vra
   function drawMover(ctx, m, x, z, dx, dz) {
     if (m.mode === WALK) return drawWalker(ctx, m, x, z, dx, dz);
     if (m.mode === KAATS) return drawKaatsers(ctx, m);
+    if (m.mode === ABSEIL) return drawAbseiler(ctx, m);
     const V = VEHICLES[m.type];
     drawBoxes(ctx, x, z, dx, dz, V.boxes, (role) => (role === 'dark' ? DARK : role === 'load' ? m.load : m.paint), { sort: V.sort, outline: !V.bike });
   }
@@ -1617,6 +1618,40 @@ Werk stap voor stap, controleer de licenties van de data die je gebruikt, en vra
     for (const [, draw] of parts) draw();
   }
 
+  // An abseiler on the tower of the Martinikerk (a real Franeker thing): on a rope from about 28 m, slowly down the face
+  // of the tower that looks toward the camera, swinging a little, then back up for the next one. Tower from 3D BAG:
+  // about 8.5 x 12.5 m around RD 165496.3, 577780.8.
+  let abseiler = null;
+  function makeAbseiler() {
+    const c = rdToLocal(165496.3, 577780.8);
+    return { mode: ABSEIL, alpha: 1, x: c.x, z: c.z, hx: 4.4, hz: 6.4, top: 28, coat: [232, 112, 40], helmet: [214, 44, 36], skin: tone(SKIN) };
+  }
+  function abseilerSpot(a) {
+    // The face whose outward normal points most toward the camera (same test as drawBoxes uses for faces).
+    const faces = [[-1, 0, a.hx], [1, 0, a.hx], [0, -1, a.hz], [0, 1, a.hz]];
+    const [nx, nz, d] = faces.reduce((best, f) => (f[1] * VIEW.c - f[0] * VIEW.s > best[1] * VIEW.c - best[0] * VIEW.s ? f : best));
+    return { x: a.x + nx * (d + 0.45), z: a.z + nz * (d + 0.45), nx, nz };
+  }
+  function drawAbseiler(ctx, a) {
+    const CYCLE = 45, t = (clock % CYCLE) / CYCLE;
+    const h = a.top - 1.8 - (a.top - 2.4) * Math.min(1, t / 0.9); // down in 90% of the cycle, then a pause at the bottom
+    const { x, z, nx, nz } = abseilerSpot(a);
+    const sway = 0.12 * Math.sin(clock * 0.8), sx = x + nx * Math.abs(sway), sz = z + nz * Math.abs(sway);
+    ctx.beginPath();
+    ctx.moveTo(...toPx(x - nx * 0.4, z - nz * 0.4, a.top));
+    ctx.lineTo(...toPx(sx, sz, h + 1.55));
+    ctx.lineWidth = 0.7;
+    ctx.strokeStyle = 'rgba(250,236,200,0.9)';
+    ctx.stroke();
+    // Feet against the wall, body leaning out, facing the tower.
+    drawBoxes(ctx, sx, sz, -nx, -nz, [
+      [-0.2, 0.05, 0.12, h, h + 0.8, [40, 44, 56]],
+      [-0.15, 0.12, 0.2, h + 0.8, h + 1.4, a.coat],
+      [-0.1, 0.1, 0.1, h + 1.4, h + 1.6, a.skin],
+      [-0.12, 0.12, 0.12, h + 1.6, h + 1.75, a.helmet],
+    ]);
+  }
+
   // A bird: two wings that beat, with its shadow far off on the ground.
   function drawBird(ctx, f, b, inView) {
     const nx = -f.dz, nz = f.dx;
@@ -1667,6 +1702,12 @@ Werk stap voor stap, controleer de licenties van de data die je gebruikt, en vra
     // The kaatsers stand on the grass: drawn under the buildings and trees layer, so whatever stands in front hides them.
     kaatsers ||= makeKaatsers();
     if (k >= 0.35 && inView(kaatsers.x, kaatsers.z, 0)) (objectsLayer ? behind : front).push([depthOf(kaatsers.x, kaatsers.z), kaatsers, kaatsers.x, kaatsers.z, 0, 0]);
+    // The abseiler hangs on the side of the tower that faces the camera: drawn over the buildings layer.
+    abseiler ||= makeAbseiler();
+    if (k >= 0.35 && inView(abseiler.x, abseiler.z, 15)) {
+      const s = abseilerSpot(abseiler);
+      front.push([depthOf(s.x, s.z), abseiler, s.x, s.z, 0, 0]);
+    }
     paint(ctx, b, k, front, inView);
   }
 

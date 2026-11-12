@@ -34,12 +34,12 @@
   },
   {
    "n": 3,
-   "year": "1634",
-   "title": "Het Korendragershuisje",
-   "text": "Het gilde van de korendragers krijgt een eigen huisje bij de haven. Zij droegen het graan van de schepen naar de pakhuizen.",
-   "x": 165619,
-   "y": 577865,
-   "h": 0,
+   "year": "1591",
+   "title": "Het stadhuis",
+   "text": "Franeker bouwt een nieuw stadhuis in renaissancestijl, met twee trapgevels en een achtkantige toren.",
+   "x": 165440,
+   "y": 577837,
+   "h": 10,
    "zoom": 1.2,
    "source": {
     "label": "Rijksmonumentenregister",
@@ -66,12 +66,12 @@
   },
   {
    "n": 5,
-   "year": "1591",
-   "title": "Het stadhuis",
-   "text": "Franeker bouwt een nieuw stadhuis in renaissancestijl, met twee trapgevels en een achtkantige toren.",
-   "x": 165440,
-   "y": 577837,
-   "h": 10,
+   "year": "1634",
+   "title": "Het Korendragershuisje",
+   "text": "Het gilde van de korendragers krijgt een eigen huisje bij de haven. Zij droegen het graan van de schepen naar de pakhuizen.",
+   "x": 165619,
+   "y": 577865,
+   "h": 0,
    "zoom": 1.2,
    "source": {
     "label": "Rijksmonumentenregister",
@@ -82,9 +82,73 @@
   },
   {
    "n": 6,
+   "year": "1863",
+   "title": "De trein komt",
+   "text": "Franeker krijgt een station aan de nieuwe spoorlijn van Leeuwarden naar Harlingen.",
+   "x": 165819.0,
+   "y": 577268.2,
+   "h": 0,
+   "zoom": 1.2,
+   "source": {
+    "label": "Wikipedia: Station Franeker",
+    "url": "https://nl.wikipedia.org/wiki/Station_Franeker"
+   },
+   "more": null,
+   "photos": []
+  },
+  {
+   "n": 7,
+   "year": "1657",
+   "title": "De Waag",
+   "text": "Franeker krijgt een nieuwe waag, waar koopwaren officieel worden gewogen voor de handel.",
+   "x": 165287.8,
+   "y": 577757.4,
+   "h": 0,
+   "zoom": 1.2,
+   "source": {
+    "label": "Wikipedia: Waag (Franeker)",
+    "url": "https://nl.wikipedia.org/wiki/Waag_(Franeker)"
+   },
+   "more": null,
+   "photos": []
+  },
+  {
+   "n": 8,
+   "year": "1446",
+   "title": "Het Sjaerdemaslot",
+   "text": "De familie Sjaerdema begint hier aan de bouw van een state, een kasteelachtig huis. Het slot staat er tot 1712, als het wordt gesloopt.",
+   "x": 165078.0,
+   "y": 577784.8,
+   "h": 0,
+   "zoom": 1.2,
+   "source": {
+    "label": "Wikipedia: Sjaerdemaslot",
+    "url": "https://nl.wikipedia.org/wiki/Sjaerdemaslot"
+   },
+   "more": null,
+   "photos": []
+  },
+  {
+   "n": 9,
+   "year": "1629",
+   "title": "Descartes in Franeker",
+   "text": "De Franse filosoof René Descartes schrijft zich in aan de universiteit van Franeker en woont in het Sjaerdemaslot. Franeker trekt in die tijd studenten uit heel Europa.",
+   "x": 165078.0,
+   "y": 577784.8,
+   "h": 0,
+   "zoom": 1.2,
+   "source": {
+    "label": "Wikipedia: Sjaerdemaslot",
+    "url": "https://nl.wikipedia.org/wiki/Sjaerdemaslot"
+   },
+   "more": null,
+   "photos": []
+  },
+  {
+   "n": 10,
    "year": "1853",
    "title": "De eerste PC",
-   "text": "Op het Sj�kel�n wordt voor het eerst de PC gekaatst. Het toernooi wordt sindsdien elk jaar in augustus gespeeld.",
+   "text": "Op het Sjûkelân wordt voor het eerst de PC gekaatst. Het toernooi wordt sindsdien elk jaar in augustus gespeeld.",
    "x": 165086,
    "y": 577788,
    "h": 0,
@@ -92,6 +156,38 @@
    "source": {
     "label": "Wikipedia: Franeker",
     "url": "https://nl.wikipedia.org/wiki/Franeker"
+   },
+   "more": null,
+   "photos": []
+  },
+  {
+   "n": 11,
+   "year": "1585-1811",
+   "title": "De Bogt fen Guné",
+   "text": "De studenten van de universiteit drinken hun bier in De Bogt fen Guné, de oudste studentenkroeg van Nederland. De universiteit is er al lang niet meer; de kroeg nog wel.",
+   "x": 165095.3,
+   "y": 577736.0,
+   "h": 0,
+   "zoom": 1.2,
+   "source": {
+    "label": "Wikipedia: De Bogt fen Guné",
+    "url": "https://nl.wikipedia.org/wiki/De_Bogt_fen_Gun%C3%A9"
+   },
+   "more": null,
+   "photos": []
+  },
+  {
+   "n": 12,
+   "year": "1921",
+   "title": "Suikerfabriek Frisia",
+   "text": "Aan de rand van de stad worden suikerbieten verwerkt, maar al na 1928 stopt dat. De gebouwen worden daarna verhuurd en in 1995 gesloopt.",
+   "x": 164602.0,
+   "y": 577168.7,
+   "h": 0,
+   "zoom": 1.2,
+   "source": {
+    "label": "Wikipedia: Suikerfabriek Frisia",
+    "url": "https://nl.wikipedia.org/wiki/Suikerfabriek_Frisia"
    },
    "more": null,
    "photos": []
